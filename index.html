@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Engineering Student CV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --surface: #13161e;
+      --border: #1e2330;
+      --accent: #00e5ff;
+      --accent2: #ff6b35;
+      --text: #e8eaf0;
+      --muted: #6b7280;
+      --heading-font: 'Bebas Neue', sans-serif;
+      --body-font: 'DM Sans', sans-serif;
+      --mono-font: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body-font);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      body { background: #fff; color: #111; }
+      :root { --bg: #fff; --surface: #f5f5f5; --border: #ddd; --accent: #0077aa; --accent2: #cc4400; --text: #111; --muted: #555; }
+      .no-print { display: none !important; }
+      .page { box-shadow: none; max-width: 100%; padding: 20mm; }
+      a { color: inherit; text-decoration: none; }
+    }
+
+    /* ── LAYOUT ── */
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .page {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── HEADER ── */
+    .cv-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      padding: 48px 48px 36px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .cv-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .header-left {}
+
+    .tag-line {
+      font-family: var(--mono-font);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .cv-name {
+      font-family: var(--heading-font);
+      font-size: 72px;
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .cv-title {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cv-title span {
+      color: var(--accent2);
+      font-weight: 500;
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding-bottom: 4px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono-font);
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+
+    .contact-item .icon {
+      width: 18px;
+      height: 18px;
+      fill: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .contact-item a { color: var(--muted); text-decoration: none; }
+    .contact-item a:hover { color: var(--accent); }
+
+    /* ── BODY GRID ── */
+    .cv-body {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+    }
+
+    .cv-main {
+      padding: 40px 48px;
+      border-right: 1px solid var(--border);
+    }
+
+    .cv-side {
+      padding: 40px 32px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section:last-child { margin-bottom: 0; }
+
+    .section-label {
+      font-family: var(--heading-font);
+      font-size: 22px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+    }
+
+    /* ── EXPERIENCE ENTRY ── */
+    .entry {
+      margin-bottom: 28px;
+      padding-left: 16px;
+      border-left: 2px solid var(--border);
+      position: relative;
+    }
+
+    .entry::before {
+      content: '';
+      position: absolute;
+      left: -5px; top: 6px;
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 2px;
+      flex-wrap: wrap;
+    }
+
+    .entry-title {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .entry-date {
+      font-family: var(--mono-font);
+      font-size: 11px;
+      color: var(--accent2);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    .entry-org {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .entry-body {
+      font-size: 13.5px;
+      color: #9ba3af;
+      line-height: 1.7;
+    }
+
+    .entry-body ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .entry-body ul li::before {
+      content: '→';
+      color: var(--accent);
+      margin-right: 8px;
+      font-size: 11px;
+    }
+
+    /* ── PROJECT CARD ── */
+    .project-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .project-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .project-year {
+      font-family: var(--mono-font);
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .project-desc {
+      font-size: 12.5px;
+      color: #9ba3af;
+      line-height: 1.6;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.2);
+      color: var(--accent);
+      font-family: var(--mono-font);
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+
+    /* ── SKILLS SIDE ── */
+    .skill-group {
+      margin-bottom: 24px;
+    }
+
+    .skill-group-label {
+      font-family: var(--mono-font);
+      font-size: 10px;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+
+    .skill-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .skill-name {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .skill-bar {
+      width: 80px;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+    }
+
+    /* ── EDUCATION SIDE ── */
+    .edu-entry {
+      margin-bottom: 20px;
+    }
+
+    .edu-degree {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .edu-school {
+      font-size: 12.5px;
+      color: var(--accent);
+    }
+
+    .edu-meta {
+      font-family: var(--mono-font);
+      font-size: 10.5px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── CERT / ACHIEVE ── */
+    .list-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #9ba3af;
+    }
+
+    .list-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ── LANGUAGES ── */
+    .lang-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #9ba3af;
+    }
+
+    .lang-level {
+      color: var(--muted);
+      font-size: 11.5px;
+      font-family: var(--mono-font);
+    }
+
+    /* ── PRINT BUTTON ── */
+    .print-btn {
+      display: block;
+      margin: 24px auto 0;
+      padding: 10px 30px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--mono-font);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .print-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ── OBJECTIVE ── */
+    .objective {
+      font-size: 14px;
+      color: #9ba3af;
+      line-height: 1.8;
+      font-style: italic;
+      border-left: 3px solid var(--accent2);
+      padding-left: 16px;
+      margin-bottom: 36px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .cv-header { grid-template-columns: 1fr; }
+      .cv-name { font-size: 52px; }
+      .header-right { align-items: flex-start; }
+      .cv-body { grid-template-columns: 1fr; }
+      .cv-main { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 24px; }
+      .cv-side { padding: 32px 24px; }
+      .cv-header { padding: 32px 24px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="page">
+
+    <!-- ══════════ HEADER ══════════ -->
+    <header class="cv-header">
+      <div class="header-left">
+        <p class="tag-line">// Engineering Professional Profile</p>
+        <h1 class="cv-name">NIKHIL<br>RAJ</h1>
+        <p class="cv-title"><span>B.Tech</span> — [CSE] Engineering · [NATIONAL INSTITUTE OF ELECTRONICS AND INFORMATION TECHNOLOGY]</p>
+      </div>
+
+      <div class="header-right">
+        <div class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          kumarnikhil36958@gmail.com
+        </div>
+        <div class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z"/></svg>
+          +91 00000 00000
+        </div>
+        <div class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+          City, State, India
+        </div>
+        <div class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          <a href="#">https://www.linkedin.com/in/nikhil-raj-854054361</a>
+        </div>
+        <div class="contact-item">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+          <a href="#">github.com/yourusername</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ══════════ BODY ══════════ -->
+    <div class="cv-body">
+
+      <!-- ── MAIN COLUMN ── -->
+      <main class="cv-main">
+
+        <!-- OBJECTIVE -->
+        <p class="objective">
+          Motivated [Cse] Engineering student at [NIELIT], passionate about [your passion area]. Seeking opportunities to apply technical knowledge and contribute to impactful engineering solutions. Strong foundation in [key skills] with hands-on project experience.
+        </p>
+
+        <!-- EXPERIENCE -->
+        <section class="section">
+          <h2 class="section-label">Experience</h2>
+
+          <div class="entry">
+            <div class="entry-header">
+              <span class="entry-title">Engineering Intern</span>
+              <span class="entry-date">Jun 2024 – Aug 2024</span>
+            </div>
+            <p class="entry-org">Company Name, City</p>
+            <div class="entry-body">
+              <ul>
+                <li>Describe your main responsibility or achievement here.</li>
+                <li>Quantify results wherever possible (e.g., reduced processing time by 30%).</li>
+                <li>Mention tools, technologies, or methodologies used.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-header">
+              <span class="entry-title">Research Assistant / Lab Assistant</span>
+              <span class="entry-date">Jan 2024 – May 2024</span>
+            </div>
+            <p class="entry-org">Department Name, University</p>
+            <div class="entry-body">
+              <ul>
+                <li>Assisted [Professor Name] in research on [topic].</li>
+                <li>Collected and analysed experimental data using [tool/software].</li>
+              </ul>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="section">
+          <h2 class="section-label">Projects</h2>
+
+          <div class="project-card">
+            <div class="project-header">
+              <span class="project-name">Project Title One</span>
+              <span class="project-year">2024</span>
+            </div>
+            <p class="project-desc">Brief description of what the project does, the problem it solves, and your specific contribution. Keep it to 2–3 lines.</p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Arduino</span>
+              <span class="tag">MATLAB</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <span class="project-name">Project Title Two</span>
+              <span class="project-year">2023</span>
+            </div>
+            <p class="project-desc">Describe the project outcome and your role. Mention any hardware, software, or frameworks used.</p>
+            <div class="project-tags">
+              <span class="tag">SolidWorks</span>
+              <span class="tag">FEA</span>
+              <span class="tag">C++</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <span class="project-name">Mini Project / Course Project</span>
+              <span class="project-year">2023</span>
+            </div>
+            <p class="project-desc">Even academic projects count. Describe the objective, your approach, and results obtained.</p>
+            <div class="project-tags">
+              <span class="tag">AutoCAD</span>
+              <span class="tag">ANSYS</span>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ACHIEVEMENTS -->
+        <section class="section">
+          <h2 class="section-label">Achievements &amp; Activities</h2>
+
+          <div class="list-item"><span class="list-dot"></span><span>Winner / Runner-up — [Competition Name], [Year]</span></div>
+          <div class="list-item"><span class="list-dot"></span><span>Represented college at [Hackathon / Technical Fest], [Year]</span></div>
+          <div class="list-item"><span class="list-dot"></span><span>Core Member — [Technical Club Name], [Year–Year]</span></div>
+          <div class="list-item"><span class="list-dot"></span><span>Published paper / Presented poster at [Conference], [Year]</span></div>
+
+        </section>
+
+      </main>
+
+      <!-- ── SIDE COLUMN ── -->
+      <aside class="cv-side">
+
+        <!-- EDUCATION -->
+        <section class="section">
+          <h2 class="section-label">Education</h2>
+
+          <div class="edu-entry">
+            <p class="edu-degree">B.Tech — [Branch] Engineering</p>
+            <p class="edu-school">University / College Name</p>
+            <p class="edu-meta">2022 – 2026 · CGPA: X.X / 10</p>
+          </div>
+
+          <div class="edu-entry">
+            <p class="edu-degree">Class XII (PCM)</p>
+            <p class="edu-school">School Name, Board</p>
+            <p class="edu-meta">2022 · XX%</p>
+          </div>
+
+          <div class="edu-entry">
+            <p class="edu-degree">Class X</p>
+            <p class="edu-school">School Name, Board</p>
+            <p class="edu-meta">2020 · XX%</p>
+          </div>
+        </section>
+
+        <!-- TECHNICAL SKILLS -->
+        <section class="section">
+          <h2 class="section-label">Skills</h2>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Programming</p>
+            <div class="skill-item">
+              <span class="skill-name">Python</span>
+              <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">C / C++</span>
+              <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">MATLAB</span>
+              <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Design &amp; Simulation</p>
+            <div class="skill-item">
+              <span class="skill-name">AutoCAD</span>
+              <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">SolidWorks</span>
+              <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">ANSYS</span>
+              <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Tools &amp; Platforms</p>
+            <div class="skill-item">
+              <span class="skill-name">Git / GitHub</span>
+              <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Arduino / ESP32</span>
+              <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">MS Office</span>
+              <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- CERTIFICATIONS -->
+        <section class="section">
+          <h2 class="section-label">Certifications</h2>
+          <div class="list-item"><span class="list-dot"></span><span>Course Name — Platform (Coursera / NPTEL / udemy) [Year]</span></div>
+          <div class="list-item"><span class="list-dot"></span><span>Course Name — Platform [Year]</span></div>
+          <div class="list-item"><span class="list-dot"></span><span>Course Name — Platform [Year]</span></div>
+        </section>
+
+        <!-- LANGUAGES -->
+        <section class="section">
+          <h2 class="section-label">Languages</h2>
+          <div class="lang-row"><span>English</span><span class="lang-level">Fluent</span></div>
+          <div class="lang-row"><span>Hindi</span><span class="lang-level">Native</span></div>
+          <div class="lang-row"><span>Punjabi</span><span class="lang-level">Native</span></div>
+        </section>
+
+      </aside>
+    </div><!-- .cv-body -->
+
+  </div><!-- .page -->
+
+  <button class="print-btn no-print" onclick="window.print()">⌘ Print / Save as PDF</button>
+</div>
+
+</body>
+</html>
